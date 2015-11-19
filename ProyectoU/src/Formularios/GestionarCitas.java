@@ -6,7 +6,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class GestionarCitas extends javax.swing.JFrame {
 
-    String jdia, jmes, jhora, jcedula;
+    String cDia, cMes, cHora, cCedula;
     DefaultListModel m1;
     Operaciones operaciones;
     ListaDeFechas listacab;
@@ -183,12 +183,12 @@ public class GestionarCitas extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
 
-        listacab = operaciones.leer("C:\\Users\\stiven\\Documents\\citas.txt",listacab);        
-        jdia = dia.getText();
-        jmes = mes.getText();
-        jhora = hora.getText();
-        jcedula = cedula.getText();
-        listacab = operaciones.nuevaCita(listacab,jdia, jmes, jhora, jcedula, jcitas, m1,"C:\\Users\\stiven\\Documents\\citas.txt");
+        listacab = operaciones.leerCita("C:\\Users\\stiven\\Documents\\citas.txt",listacab);        
+        cDia = dia.getText();
+        cMes = mes.getText();
+        cHora = hora.getText();
+        cCedula = cedula.getText();
+        listacab = operaciones.nuevaCita(listacab,cDia, cMes, cHora, cCedula, jcitas, m1,"C:\\Users\\stiven\\Documents\\citas.txt");
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void cedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cedulaActionPerformed
