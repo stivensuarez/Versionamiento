@@ -15,7 +15,8 @@ public class Operaciones {
     ListaDeFechas auxFech, cabFech;
     ListaDeProductos auxProdu, cabProdu;
 
-    public ListaDeFechas nuevaCita(ListaDeFechas cab, String dia, String mes, String hora, String cedula, JList lista, DefaultListModel m1, String rut) {
+    // operaciones para citas 
+    public ListaDeFechas nuevaCita(ListaDeFechas cab, String dia, String mes, String hora, String min, String cedula, JList lista, DefaultListModel m1, String rut) {
         String[] hor;
         auxFech = cab;
 
@@ -23,9 +24,8 @@ public class Operaciones {
             cab = new ListaDeFechas();
             cab.dia = dia;
             cab.mes = mes;
-            hor = hora.split(":");
-            cab.hora = hor[0];
-            cab.minuto = hor[1];
+            cab.hora = hora;
+            cab.minuto = min;
             cab.cedula = cedula;
             m1.addElement(mes + "     " + dia + "      " + hora);
 
@@ -38,9 +38,8 @@ public class Operaciones {
             auxFech = auxFech.liga;
             auxFech.dia = dia;
             auxFech.mes = mes;
-            hor = hora.split(":");
-            auxFech.hora = hor[0];
-            auxFech.minuto = hor[1];
+            auxFech.hora = hora;
+            auxFech.minuto = min;
             auxFech.cedula = cedula;
             m1.addElement(mes + "     " + dia + "      " + hora);
         }
@@ -96,6 +95,7 @@ public class Operaciones {
         }
         return cab;
     }
+    //operaciones para productos 
 
     public void escribirProducto(String rut, ListaDeProductos cab) {
         auxProdu = cab;
@@ -104,7 +104,7 @@ public class Operaciones {
             FileWriter escritor = new FileWriter(ruta);
             while (auxProdu != null) {
                 escritor.write(auxProdu.tipoVenta + "/" + auxProdu.caracte + "/" + auxProdu.nom + "/"
-                        + auxProdu.prec + "/" + auxProdu.costo + "/" + auxProdu.unidad + "/" + auxProdu.tiempo + "-");
+                        + auxProdu.prec + "/" + auxProdu.costo + "/" + auxProdu.unidad + "-");
                 auxProdu = auxProdu.liga;
             }
             escritor.close();
@@ -134,7 +134,6 @@ public class Operaciones {
                     auxProdu.prec = elementos[3];
                     auxProdu.costo = elementos[4];
                     auxProdu.unidad = elementos[5];
-                    auxProdu.tiempo = elementos[6];
                     if (i + 1 != numProd.length) {
                         auxProdu.liga = new ListaDeProductos();
                         auxProdu = auxProdu.liga;
@@ -142,6 +141,8 @@ public class Operaciones {
                 }
                 lector.close();
                 linea.close();
+            } else {
+                cab = null;
             }
         } catch (IOException e) {
             cab = null;
@@ -149,7 +150,7 @@ public class Operaciones {
         return cab;
     }
 
-    public ListaDeProductos nuevoProducto(ListaDeProductos cab, String venta, String caracteristica, String nombre, String precio, String costo, String unidad, String tiempo, String rut) {
+    public ListaDeProductos nuevoProducto(ListaDeProductos cab, String venta, String caracteristica, String nombre, String precio, String costo, String unidad, String rut) {
 
         auxProdu = cab;
 
@@ -161,7 +162,6 @@ public class Operaciones {
             cab.prec = precio;
             cab.costo = costo;
             cab.unidad = unidad;
-            cab.tiempo = tiempo;
 
         } else {
             while (auxProdu.liga != null) {
@@ -176,7 +176,6 @@ public class Operaciones {
             auxProdu.prec = precio;
             auxProdu.costo = costo;
             auxProdu.unidad = unidad;
-            auxProdu.tiempo = tiempo;
         }
         escribirProducto(rut, cab);
         return cab;

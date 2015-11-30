@@ -12,14 +12,16 @@ import java.awt.Color;
  * @author PC - 4
  */
 public class GestionDeProductos extends javax.swing.JFrame {
+//AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 
     ListaDeProductos listapro;
     Operaciones operaciones;
     String cVent, cCarac, cNombre, cPrec, cCosto, cUnidad, ctiempo;
-
+    int sw ;
     public GestionDeProductos() {
         initComponents();
         this.getContentPane().setBackground(Color.white);
+        sw = 0;
         operaciones = new Operaciones();
     }
 
@@ -47,7 +49,11 @@ public class GestionDeProductos extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        duracion = new javax.swing.JTextField();
+        hora = new javax.swing.JTextField();
+        minutos = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gestión de productos");
@@ -72,8 +78,11 @@ public class GestionDeProductos extends javax.swing.JFrame {
         unidades.setColumns(8);
 
         venta.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "---------", "Producto", "Procedimiento", " " }));
-
-        caracteristica.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "----------", "Belleza", "Bisuteria", "Marroquineria", "Rayitos", "Corte", "Manicure", "Pedicure" }));
+        venta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ventaActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("Costo:");
 
@@ -109,7 +118,13 @@ public class GestionDeProductos extends javax.swing.JFrame {
 
         jLabel7.setText("Duración:");
 
-        duracion.setColumns(8);
+        hora.setColumns(8);
+
+        jLabel8.setText("Hora");
+
+        jLabel9.setText("minutos");
+
+        jLabel10.setText(":");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -118,10 +133,6 @@ public class GestionDeProductos extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
@@ -132,15 +143,28 @@ public class GestionDeProductos extends javax.swing.JFrame {
                             .addComponent(jLabel7)
                             .addComponent(jLabel4))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addGap(33, 33, 33)
+                                .addComponent(jLabel9))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(venta, 0, 102, Short.MAX_VALUE)
                                 .addComponent(unidades)
                                 .addComponent(costo)
                                 .addComponent(caracteristica, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(nombre)
-                                .addComponent(precio))
-                            .addComponent(duracion, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(precio)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(hora, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 4, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(12, 12, 12)
+                                    .addComponent(minutos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton2)))
                 .addContainerGap(79, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -173,11 +197,17 @@ public class GestionDeProductos extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(unidades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(duracion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel9))
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(hora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(minutos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel10))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -200,16 +230,25 @@ public class GestionDeProductos extends javax.swing.JFrame {
     }//GEN-LAST:event_precioActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       
-        listapro = operaciones.leerProducto("C:\\Users\\stiven\\Documents\\productos.txt", listapro);
-        cVent = venta.getSelectedItem().toString();
-        cCarac = caracteristica.getSelectedItem().toString();
-        cNombre = nombre.getText();
-        cPrec = precio.getText();
-        cCosto = costo.getText();
-        cUnidad = unidades.getText();
-        ctiempo = duracion.getText();
-        listapro = operaciones.nuevoProducto(listapro, cVent, cCarac, cNombre, cPrec, cCosto, cUnidad, ctiempo, "C:\\Users\\stiven\\Documents\\productos.txt");
+          if(sw == 1){
+              listapro = operaciones.leerProducto("C:\\Users\\stiven\\Documents\\productos.txt", listapro);
+              cVent = venta.getSelectedItem().toString();
+              cCarac = caracteristica.getSelectedItem().toString();
+              cNombre = nombre.getText();
+              cPrec = precio.getText();
+              cCosto = costo.getText();
+              cUnidad = unidades.getText();
+              listapro = operaciones.nuevoProducto(listapro, cVent, cCarac, cNombre, cPrec, cCosto, cUnidad, "C:\\Users\\stiven\\Documents\\productos.txt");
+          }
+//        listapro = operaciones.leerProducto("C:\\Users\\stiven\\Documents\\productos.txt", listapro);
+//        cVent = venta.getSelectedItem().toString();
+//        cCarac = caracteristica.getSelectedItem().toString();
+//        cNombre = nombre.getText();
+//        cPrec = precio.getText();
+//        cCosto = costo.getText();
+//        cUnidad = unidades.getText();
+//        ctiempo = hora.getText();
+//        listapro = operaciones.nuevoProducto(listapro, cVent, cCarac, cNombre, cPrec, cCosto, cUnidad, ctiempo, "C:\\Users\\stiven\\Documents\\productos.txt");
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -219,6 +258,44 @@ public class GestionDeProductos extends javax.swing.JFrame {
         Menu5.setVisible(true);
         Menu5.setLocationRelativeTo(null);
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void ventaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ventaActionPerformed
+        String respuesta;
+        respuesta = venta.getSelectedItem().toString();
+        if (respuesta.equalsIgnoreCase("procedimiento")) {
+            unidades.setVisible(false);
+            jLabel5.setVisible(false);
+            jLabel7.setVisible(true);
+            hora.setVisible(true);
+            minutos.setVisible(true);
+            jLabel9.setVisible(true);
+            jLabel8.setVisible(true);
+            jLabel10.setVisible(true);
+            caracteristica.removeAllItems();
+            caracteristica.addItem("Rayitos");
+            caracteristica.addItem("Corte");
+            caracteristica.addItem("Manicure");
+            caracteristica.addItem("Pedicure");
+            sw = 0;
+
+        } else if (respuesta.equalsIgnoreCase("producto")) {
+            unidades.setVisible(true);
+            jLabel5.setVisible(true);
+            jLabel7.setVisible(false);
+            hora.setVisible(false);
+            minutos.setVisible(false);
+            jLabel9.setVisible(false);
+            jLabel8.setVisible(false);
+            jLabel10.setVisible(false);
+            caracteristica.removeAllItems();
+            caracteristica.addItem("Belleza");
+            caracteristica.addItem("Bisuteria");
+            caracteristica.addItem("Marroquineria");
+            sw = 1;
+
+        }
+        //----------BellezaBisuteriaMarroquineria
+    }//GEN-LAST:event_ventaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -258,16 +335,20 @@ public class GestionDeProductos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox caracteristica;
     private javax.swing.JTextField costo;
-    private javax.swing.JTextField duracion;
+    private javax.swing.JTextField hora;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JTextField minutos;
     private javax.swing.JTextField nombre;
     private javax.swing.JTextField precio;
     private javax.swing.JTextField unidades;
