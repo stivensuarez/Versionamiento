@@ -2,16 +2,14 @@ package Formularios;
 
 import java.awt.Color;
 
-
 /**
- * Clase que representa los productos que van a ser gestionados 
- * 
- * @author stiven
- * Fecha de creación : 25/11/2015
+ * Clase que representa los productos que van a ser gestionados
+ *
+ * @author stiven Fecha de creación : 25/11/2015
  * @version 1.0
  */
 public class GestionDeProductos extends javax.swing.JFrame {
-
+    ListaDeProcedimientos listaProce;
     ListaDeProductos listaPro;// Lista de productos agregados  
     Operaciones operaciones;
     String cVent; // Tipo de venta que el usuario ingresa o ingresó
@@ -20,9 +18,9 @@ public class GestionDeProductos extends javax.swing.JFrame {
     String cPrec; // Precio del servicio 
     String cCosto; // Costo del servicio 
     String cUnidad; // Número de unidades 
-    String ctiempo; // Tiempo total del procedimiento 
-    int sw ; // Sirve para idénticar si es un producto o un procedimiento 
-    
+    String cHora; // horas del procedimiento 
+     String cMin; // minutos  del procedimiento 
+    int sw; // Sirve para idénticar si es un producto o un procedimiento 
 
     public GestionDeProductos() {
         initComponents();
@@ -31,7 +29,6 @@ public class GestionDeProductos extends javax.swing.JFrame {
         operaciones = new Operaciones();
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -217,7 +214,7 @@ public class GestionDeProductos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreActionPerformed
-     
+
     }//GEN-LAST:event_nombreActionPerformed
 
     private void costoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_costoActionPerformed
@@ -225,23 +222,36 @@ public class GestionDeProductos extends javax.swing.JFrame {
     }//GEN-LAST:event_costoActionPerformed
 
     private void precioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_precioActionPerformed
-      
+
     }//GEN-LAST:event_precioActionPerformed
     /**
-     * Boton aceptar que lleva toda la incormacion a los archivos 
-     * @param evt 
+     * Boton aceptar que lleva toda la incormacion a los archivos
+     *
+     * @param evt
      */
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-          if(sw == 1){
-              listaPro = operaciones.leerProducto("C:\\Users\\stiven\\Documents\\productos.txt", listaPro);
-              cVent = venta.getSelectedItem().toString();
-              cCarac = caracteristica.getSelectedItem().toString();
-              cNombre = nombre.getText();
-              cPrec = precio.getText();
-              cCosto = costo.getText();
-              cUnidad = unidades.getText();
-              listaPro = operaciones.nuevoProducto(listaPro, cVent, cCarac, cNombre, cPrec, cCosto, cUnidad, "C:\\Users\\stiven\\Documents\\productos.txt");
-          }
+        if (sw == 1) {
+            listaPro = operaciones.leerProducto("C:\\Users\\stiven\\Documents\\productos.txt", listaPro);
+            cVent = venta.getSelectedItem().toString();
+            cCarac = caracteristica.getSelectedItem().toString();
+            cNombre = nombre.getText();
+            cPrec = precio.getText();
+            cCosto = costo.getText();
+            cUnidad = unidades.getText();
+            listaPro = operaciones.nuevoProducto(listaPro, cVent, cCarac, cNombre, cPrec, cCosto, cUnidad, "C:\\Users\\stiven\\Documents\\productos.txt");
+        } else {
+            if (sw == 0) {
+                listaProce = operaciones.leerProcedimiento("C:\\Users\\stiven\\Documents\\proce.txt", listaProce);
+                cVent = venta.getSelectedItem().toString();
+                cCarac = caracteristica.getSelectedItem().toString();
+                cNombre = nombre.getText();
+                cPrec = precio.getText();
+                cHora = hora.getSelectedItem().toString();
+                cMin = mins.getSelectedItem().toString();
+                listaProce = operaciones.nuevoProcedimiento(listaProce, cVent, cCarac, cNombre, cPrec, cHora, cMin, "C:\\Users\\stiven\\Documents\\proce.txt");
+
+            }
+        }
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -252,10 +262,12 @@ public class GestionDeProductos extends javax.swing.JFrame {
         Menu5.setLocationRelativeTo(null);
     }//GEN-LAST:event_jButton4ActionPerformed
     /**
-     * En este evento se organizan los datos que elija el usuario, sea un producto o un procedimiento 
-     * @param evt 
+     * En este evento se organizan los datos que elija el usuario, sea un
+     * producto o un procedimiento
+     *
+     * @param evt
      */
-    
+
     private void ventaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ventaActionPerformed
         String respuesta;
         respuesta = venta.getSelectedItem().toString();
@@ -267,7 +279,7 @@ public class GestionDeProductos extends javax.swing.JFrame {
             mins.setVisible(true);
             jLabel9.setVisible(true);
             jLabel8.setVisible(true);
-          
+
             caracteristica.removeAllItems();
             caracteristica.addItem("Rayitos");
             caracteristica.addItem("Corte");
@@ -290,11 +302,11 @@ public class GestionDeProductos extends javax.swing.JFrame {
             sw = 1;
 
         }
-      
+
     }//GEN-LAST:event_ventaActionPerformed
 
     public static void main(String args[]) {
-      
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new GestionDeProductos().setVisible(true);

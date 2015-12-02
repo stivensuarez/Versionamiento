@@ -3,7 +3,6 @@
 package principal;
 
 import Formularios.EntradaPrincipal;
-import java.util.Date;
 
 public class Main
 {
