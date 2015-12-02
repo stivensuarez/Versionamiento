@@ -1,27 +1,27 @@
 package Formularios;
 
 import java.awt.Color;
+import javax.swing.DefaultListModel;
 import javax.swing.table.DefaultTableModel;
 
-
 public class Menu extends javax.swing.JFrame {
-    
-    
-    
-    
-    
+
+    DefaultListModel c1, pro1, proc1;
+    Operaciones operciones;
+
     public Menu() {
-        
-        
+
         initComponents();
         this.getContentPane().setBackground(Color.white);
-        
-       
-       
-    }
-    
+        c1 = new DefaultListModel();
+        pro1 = new DefaultListModel();
+        operciones = new Operaciones();
+        proc1 = new DefaultListModel();
+        JListCitas();
+        JListCatalogo();
 
-    
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -248,10 +248,36 @@ public class Menu extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
+    public void JListCitas() {
+
+        c1 = operciones.llenarListaCitas(c1, "C:\\Users\\stiven\\Documents\\citas.txt");
+        if (c1 != null) {
+            JlistCitas.setModel(c1);
+        }
+
+    }
+    public void JListCatalogo() {
+        pro1 = operciones.llenarListaProductos(pro1, "C:\\Users\\stiven\\Documents\\productos.txt");
+        if (pro1 != null) {
+            jListCatalogo.setModel(pro1);
+        }
+        pro1  = operciones.llenarListaProcedimientos(pro1, "C:\\Users\\stiven\\Documents\\proce.txt");
+        if (pro1 != null) {
+            jListCatalogo.setModel(pro1);
+        }
+    }
+//
+//    public void JListUsuarios() {
+//
+//        c1 = operciones.llenarListaCitas(c1, "C:\\Users\\stiven\\Documents\\citas.txt");
+//        if (c1 != null) {
+//            JlistCitas.setModel(c1);
+//        }
+//    }
 
     /**
-    * @param args the command line arguments
-    */
+     * @param args the command line arguments
+     */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
