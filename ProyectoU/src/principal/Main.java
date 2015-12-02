@@ -3,6 +3,7 @@
 package principal;
 
 import Formularios.EntradaPrincipal;
+import java.util.Date;
 
 public class Main
 {
@@ -13,6 +14,7 @@ public class Main
         EntradaPrincipal miInicio = new EntradaPrincipal();
         miInicio.setLocationRelativeTo(null);
         miInicio.setVisible(true);
+        
     }
 
 }

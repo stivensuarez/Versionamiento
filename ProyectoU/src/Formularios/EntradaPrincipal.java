@@ -7,24 +7,17 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import principal.Datos;
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 
-/*
- * Formularios.java
- *
- * Created on 29/09/2015, 03:33:07 PM
- */
+
 
 /**
  *
  * @author MEDIATECNICA
+ * Created on 29/09/2015, 03:33:07 PM
  */
 public class EntradaPrincipal extends javax.swing.JFrame {
 
-    /** Creates new form Formularios */
+    
     public EntradaPrincipal() {
         initComponents();
         this.getContentPane().setBackground(Color.white);
@@ -159,11 +152,11 @@ public class EntradaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContraseñaActionPerformed
-        // TODO add your handling code here:
+     
     }//GEN-LAST:event_txtContraseñaActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
@@ -190,13 +183,13 @@ public class EntradaPrincipal extends javax.swing.JFrame {
         }
         Menu miMenu = new Menu();
         this.setVisible(false);
-        //miMenu.setExtendedState(JFrame.);
+       
         miMenu.setVisible(true);
         miMenu.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_txtUsuarioActionPerformed
 
     private void btnObservarCatalogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObservarCatalogoActionPerformed
@@ -211,9 +204,7 @@ public class EntradaPrincipal extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    /**
-    * @param args the command line arguments
-    */
+   
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

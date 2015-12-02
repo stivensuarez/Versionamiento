@@ -7,19 +7,38 @@ import java.io.FileWriter;
 import java.io.IOException;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
+/**
+ * Con la clase operaciones se gestionara la lectura y escritura de todos los datos ingresados por el usuario
+ * Esta clase tiene métodos repetidos ya que sirve dependiendo del dato, sea una cita o un producto
+ * @author stiven
+ * Fecha de creación: 20/11/2015
+ * @version 2.0
+ */
 
 public class Operaciones {
 
-    File ruta;
-    int sw;
-    ListaDeFechas auxFech, cabFech;
-    ListaDeProductos auxProdu, cabProdu;
+    File ruta; // Con este objeto se manipulara el archivo donde se almacenara la información
+    ListaDeFechas auxFech; // Es el apuntador auxiliar de la lista de fechas 
+    ListaDeFechas cabFech; // Es la cabeza de la lista de fechas
+    ListaDeProductos auxProdu;  // Es el apuntador auxiliar de la lista de productos
+    ListaDeProductos cabProdu; // Es la cabeza de la lista de productos 
 
-    // operaciones para citas 
+    /**
+     * Con este método agregamos una nueva cita a la lista y a la lista grafica 
+     * @param cab Es necesario para poder recorrer la lista 
+     * @param dia Dato ingresado por el usuario para ser guardado
+     * @param mes Dato ingresado por el usuario para ser guardado
+     * @param hora Dato ingresado por el usuario para ser guardado
+     * @param min Dato ingresado por el usuario para ser guardado
+     * @param cedula Dato ingresado por el usuario para ser guardado
+     * @param lista Este elemento es  muy importante ya que es la interfaz gráfica donde se ven los datos guardados 
+     * @param m1 Sirve para facilitar el uso de la listas graficas 
+     * @param rut Ruta del archivo que se va a gestionar 
+     * @return Despues de agregar la cita, retorna la lista modificada 
+     */
     public ListaDeFechas nuevaCita(ListaDeFechas cab, String dia, String mes, String hora, String min, String cedula, JList lista, DefaultListModel m1, String rut) {
         String[] hor;
         auxFech = cab;
-
         if (cab == null) {
             cab = new ListaDeFechas();
             cab.dia = dia;
@@ -27,7 +46,7 @@ public class Operaciones {
             cab.hora = hora;
             cab.minuto = min;
             cab.cedula = cedula;
-            m1.addElement(mes + "     " + dia + "      " + hora);
+            m1.addElement(dia + "     " + mes + "     " + hora+"        "+min);
 
         } else {
             while (auxFech.liga != null) {
@@ -41,12 +60,16 @@ public class Operaciones {
             auxFech.hora = hora;
             auxFech.minuto = min;
             auxFech.cedula = cedula;
-            m1.addElement(mes + "     " + dia + "      " + hora);
+            m1.addElement(dia + "      " + mes + "      " + hora+"           "+min);
         }
         escribirCita(rut, cab);
         return cab;
     }
-
+    /**
+     * Método que escribe los datos de una lista 
+     * @param rut Ruta del archivo a buscar 
+     * @param cab Lista con los datos que se guardaran 
+     */
     public void escribirCita(String rut, ListaDeFechas cab) {
         auxFech = cab;
         try {
@@ -61,7 +84,13 @@ public class Operaciones {
             System.out.printf(rut, "No se encontro");
         }
     }
-
+    /**
+     * Método que sirve para la lectura de datos en un archivo 
+     * este crea una lista dependiendo del numero de datos que encuentre 
+     * @param rut Ruta del archivo a buscar 
+     * @param cab Lista que se creara 
+     * @return retorna cab con todos los datos del archivo en este caso citas 
+     */
     public ListaDeFechas leerCita(String rut, ListaDeFechas cab) {
         auxFech = new ListaDeFechas();
         cab = auxFech;
@@ -89,6 +118,10 @@ public class Operaciones {
                 }
                 lector.close();
                 linea.close();
+            }
+            else{
+                cab = null;
+            
             }
         } catch (IOException e) {
             cab = null;
